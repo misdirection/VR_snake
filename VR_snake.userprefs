@@ -1,0 +1,18 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerMovement.cs">
+    <Files>
+      <File FileName="Assets\Scripts\PlayerMovement.cs" Line="54" Column="64" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\Christian\Source\Workspaces\Arbeitsbereich\VR_snake\Assets\Scripts\PlayerMovement.cs" line="91" />
+      <Breakpoint file="C:\Users\Christian\Source\Workspaces\Arbeitsbereich\VR_snake\Assets\Scripts\PlayerMovement.cs" line="92" />
+      <Breakpoint file="C:\Users\Christian\Source\Workspaces\Arbeitsbereich\VR_snake\Assets\Scripts\PlayerMovement.cs" line="93" />
+      <Breakpoint file="C:\Users\Christian\Source\Workspaces\Arbeitsbereich\VR_snake\Assets\Scripts\PlayerMovement.cs" line="95" />
+      <Breakpoint file="C:\Users\Christian\Source\Workspaces\Arbeitsbereich\VR_snake\Assets\Scripts\PlayerMovement.cs" line="97" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
