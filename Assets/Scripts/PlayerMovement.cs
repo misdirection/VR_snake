@@ -13,7 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public bool gameover = false;
     private bool isMoving = false;
     public int speed = 1;
-
+    public bool lookUp = false;
+    public bool lookDown = false;
 
     //Methods
     // Use this for initialization
@@ -22,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
         showHighscore = false;
         int i = 0;
-        while (i < 22)
+        while (i < 25)
         {
             placePickUps();
             i++;
@@ -39,13 +40,84 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Return))
+            Application.LoadLevel(Application.loadedLevel);
         if (isMoving)
         {
-            if (Input.GetKeyUp(KeyCode.UpArrow)) transform.Rotate(new Vector3(-90, 0, 0));
-            if (Input.GetKeyUp(KeyCode.DownArrow)) transform.Rotate(new Vector3(90, 0, 0));
-            if (Input.GetKeyUp(KeyCode.LeftArrow)) transform.Rotate(new Vector3(0, -90, 0));
-            if (Input.GetKeyUp(KeyCode.RightArrow)) transform.Rotate(new Vector3(0, 90, 0));
+            
+            if (Input.GetKeyDown(KeyCode.UpArrow) && lookDown)
+            {
+                transform.Rotate(new Vector3(-90, 0, 0));
+                lookDown = false;
+            }
 
+            else if (Input.GetKeyDown(KeyCode.UpArrow) && lookUp)
+            {
+
+                transform.Rotate(new Vector3(-90, 0, 0));
+                transform.Rotate(new Vector3(0, 0, 180));
+                lookUp = false;
+            }
+
+            else if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+
+                transform.Rotate(new Vector3(-90, 0, 0));
+                lookUp = true;
+            };
+
+            if (Input.GetKeyDown(KeyCode.DownArrow) && lookUp)
+            {
+                transform.Rotate(new Vector3(90, 0, 0));
+                lookUp = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow) && lookDown)
+            {
+
+                transform.Rotate(new Vector3(90, 0, 0));
+                transform.Rotate(new Vector3(0, 0, 180));
+                lookUp = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                transform.Rotate(new Vector3(90, 0, 0));
+                lookDown = true;
+            };
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && lookUp)
+            {
+                transform.Rotate(new Vector3(90, 0, 0));
+                transform.Rotate(new Vector3(0, -90, 0));
+                lookUp = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow) && lookDown)
+            {
+                transform.Rotate(new Vector3(-90, 0, 0));
+                transform.Rotate(new Vector3(0, -90, 0));
+                lookDown = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                transform.Rotate(new Vector3(0, -90, 0));
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightArrow) && lookUp)
+            {
+                transform.Rotate(new Vector3(90, 0, 0));
+                transform.Rotate(new Vector3(0, 90, 0));
+                lookUp = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow) && lookDown)
+            {
+                transform.Rotate(new Vector3(-90, 0, 0));
+                transform.Rotate(new Vector3(0, 90, 0));
+                lookDown = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                transform.Rotate(new Vector3(0, 90, 0));
+            }
+            
         }
     }
     // Update is called once per frame
@@ -69,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
 
     void placePickUps()
     {
-        Vector3 position = new Vector3(Random.Range(-9, 9), Random.Range(-9, 9), Random.Range(-9, 9));
+        Vector3 position = new Vector3(Random.Range(-29, 29), Random.Range(-29, 29), Random.Range(-29, 29));
         GameObject PickUp = Instantiate(pickUp, position, Quaternion.identity) as GameObject;
         PickUp.name = "pickUp";
     }
@@ -81,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
             Destroy(col.gameObject);
             pickUpCount++;
             addPiece();
-            placePickUps();
+            //placePickUps();
 
 
         }
@@ -96,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void addPiece()
     {
-        Vector3 pos = gameObject.transform.position - new Vector3(0, 0, 2);
+        Vector3 pos = transform.position - (GetComponent<Rigidbody>().velocity * 500);
         GameObject newPiece = (GameObject)Instantiate(piece, pos, Quaternion.identity);
         newPiece.name = "Piece";
         Debug.Log("Last piece is:" + lastPiece);
@@ -128,8 +200,8 @@ public class PlayerMovement : MonoBehaviour
         }
         if (gameover)
         {
-            GUI.Label(new Rect(200, 200, Screen.width/2, Screen.height/2), "Game Over!");
-            
+            GUI.Label(new Rect(200, 200, Screen.width / 2, Screen.height / 2), "Game Over!");
+
             GUI.Label(new Rect(200, 250, 200, 550), "Press Enter to re-start the game");
         }
     }
